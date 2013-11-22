@@ -42,7 +42,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=5000,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 30.05875295)
+        self.assertAlmostEqual(level, 30.06003008)
 
     def test_distant_total_level_damped_rated_02(self):
         """distance < reference distance"""
@@ -52,7 +52,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=200,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 64.33378745)
+        self.assertAlmostEqual(level, 64.33378053)
 
     def test_level_to_power_01(self):
         p = audiocalc.level_to_power(100)

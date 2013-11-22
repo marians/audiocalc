@@ -5,7 +5,7 @@ import math
 
 # per named ocatve band: Tuple of (middle frequency, A factor)
 OCTAVE_BANDS = {
-    'f63': (63.5, -26.21),
+    'f63': (62.5, -26.21),
     'f125': (125, -16.18),
     'f250': (250, -8.67),
     'f500': (500, -3.25),
