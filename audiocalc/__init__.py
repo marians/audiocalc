@@ -120,3 +120,11 @@ def distant_total_damped_rated_level(
         sums += pow(10.0, (distant_val / 10.0))
     level = 10.0 * math.log(sums, 10.0)
     return level
+
+
+def level_to_power(level):
+    """
+    Converts logarithmic sound pressure level value (dB)
+    to metric power value (W/m^2)
+    """
+    return pow(10.0, (float(level) / 10.0)) * 1e-12

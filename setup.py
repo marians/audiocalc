@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='audiocalc',
-      version='0.0.2',
+      version='0.0.3',
       description='A few audio/sound calculation utilities',
       author='Marian Steinbach',
       author_email='marian@sendung.de',

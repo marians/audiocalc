@@ -54,5 +54,9 @@ class TestSequenceFunctions(unittest.TestCase):
             relhum=80)
         self.assertAlmostEqual(level, 64.33378745)
 
+    def test_level_to_power_01(self):
+        p = audiocalc.level_to_power(100)
+        self.assertEqual(p, 0.01)
+
 if __name__ == '__main__':
     unittest.main()

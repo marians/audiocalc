@@ -98,6 +98,15 @@ This combines the powers of some of the functions above. It calculates the total
 40.860935587070635
 ```
 
+### level_to_power
+
+Converts logarithmic sound pressure level (dB) values to metric power (W/m²) values.
+
+```python
+>>> audiocalc.level_to_power(100)
+0.01
+```
+
 ## Credits
 
 Some basic calculations have been adapted from http://www.sengpielaudio.com/
