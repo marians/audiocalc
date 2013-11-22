@@ -1,7 +1,7 @@
 audiocalc
 =========
 
-A few audio/sound calculation tools for Python.
+A few audio/sound calculation utilities for Python.
 
 Caution: I am not a sound engineer. This comes without any sort of guarantee. See file "LICENSE" for details.
 
@@ -37,7 +37,7 @@ Given sound pressure levels for octave frequencies, calculates the total sound p
 73.91092323
 ```
 
-### total_level_rated
+### total_rated_level
 
 Given sound pressure levels for octave frequencies, calculates the A-rated total sound pressure level.
 
@@ -51,15 +51,21 @@ Given sound pressure levels for octave frequencies, calculates the A-rated total
     'f2000': 47,
     'f4000': 40,
     'f8000': 32}
->>> audiocalc.total_level_rated(octave_frequencies)
+>>> audiocalc.total_rated_level(octave_frequencies)
 60.5054659
 ```
 
 ### distant_level
 
-Given a reference sound pressure level in a reference distance, this function calculates the sound pressure level at a certain distance.
+Given a reference sound pressure level (`reference_level`) in a `reference_distance`, this function calculates the sound pressure level at a certain distance.
 
-It is assumed that the sound source is point-shaped and energy spreads in a perfect ball shape.
+The unit for sound level parameter and return value is dB, the unit for distances is meters.
+
+Assumptions:
+
+* No air damping
+* The sound source is point-shaped
+* energy spreads equally to all directions
 
 ```python
 >>> l = audiocalc.distant_level(
@@ -70,6 +76,28 @@ It is assumed that the sound source is point-shaped and energy spreads in a perf
 60.00000000000001
 ```
 
+### distant_total_damped_rated_level
+
+This combines the powers of some of the functions above. It calculates the total A-rated sound pressure level, based on a reference distance and octave sound pressure levels, given a distance, temperature and relative humidity.
+
+```python
+>>> octave_frequencies = {
+    'f63': 71.5,
+    'f125': 68.5,
+    'f250': 64,
+    'f500': 58,
+    'f1000': 53,
+    'f2000': 47,
+    'f4000': 40,
+    'f8000': 32}
+>>> audiocalc.distant_total_damped_rated_level(
+    octave_frequencies=octave_frequencies,
+    reference_distance=300,
+    distance=2000,
+    temp=20, relhum=80)
+40.860935587070635
+```
+
 ## Credits
 
-Some calculations have been adapted from http://www.sengpielaudio.com/
+Some basic calculations have been adapted from http://www.sengpielaudio.com/

@@ -3,15 +3,16 @@
 import math
 
 
+# per named ocatve band: Tuple of (middle frequency, A factor)
 OCTAVE_BANDS = {
-    'f63': -26.21,
-    'f125': -16.18,
-    'f250': -8.67,
-    'f500': -3.25,
-    'f1000': 0,
-    'f2000': 1.2,
-    'f4000': 0.96,
-    'f8000': -1.15
+    'f63': (63.5, -26.21),
+    'f125': (125, -16.18),
+    'f250': (250, -8.67),
+    'f500': (500, -3.25),
+    'f1000': (1000, 0),
+    'f2000': (2000, 1.2),
+    'f4000': (4000, 0.96),
+    'f8000': (8000, -1.15)
 }
 
 
@@ -53,7 +54,7 @@ def total_level(octave_frequencies):
     return level
 
 
-def total_level_rated(octave_frequencies):
+def total_rated_level(octave_frequencies):
     """
     Calculates the A-rated total sound pressure level
     based on octave band frequencies
@@ -64,7 +65,7 @@ def total_level_rated(octave_frequencies):
             continue
         if octave_frequencies[band] is None:
             continue
-        sums += pow(10.0, ((float(octave_frequencies[band]) + OCTAVE_BANDS[band]) / 10.0))
+        sums += pow(10.0, ((float(octave_frequencies[band]) + OCTAVE_BANDS[band][1]) / 10.0))
     level = 10.0 * math.log(sums, 10.0)
     return level
 
@@ -81,4 +82,41 @@ def distant_level(reference_level, distance, reference_distance=1.0):
     """
     rel_dist = float(reference_distance) / float(distance)
     level = float(reference_level) + 20.0 * (math.log(rel_dist) / math.log(10))
+    return level
+
+
+def distant_total_damped_rated_level(
+            octave_frequencies,
+            distance,
+            temp,
+            relhum,
+            reference_distance=1.0):
+    """
+    Calculates the damped, A-rated total sound pressure level
+    in a given distance, temperature and relative humidity
+    from octave frequency sound pressure levels in a reference distance
+    """
+    damping_distance = distance - reference_distance
+    sums = 0.0
+    for band in OCTAVE_BANDS.keys():
+        if band not in octave_frequencies:
+            continue
+        if octave_frequencies[band] is None:
+            continue
+        # distance-adjusted level per band
+        distant_val = distant_level(
+            reference_level=float(octave_frequencies[band]),
+            distance=distance,
+            reference_distance=reference_distance
+        )
+        # damping
+        damp_per_meter = damping(
+            temp=temp,
+            relhum=relhum,
+            freq=OCTAVE_BANDS[band][0])
+        distant_val = distant_val - (damping_distance * damp_per_meter)
+        # applyng A-rating
+        distant_val += OCTAVE_BANDS[band][1]
+        sums += pow(10.0, (distant_val / 10.0))
+    level = 10.0 * math.log(sums, 10.0)
     return level
