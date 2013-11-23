@@ -110,3 +110,7 @@ Converts logarithmic sound pressure level (dB) values to metric power (W/m²) va
 ## Credits
 
 Some basic calculations have been adapted from http://www.sengpielaudio.com/
+
+## Like audiocalc?
+
+Feel free to [tip me](https://www.gittip.com/marians/)!
