@@ -100,12 +100,27 @@ This combines the powers of some of the functions above. It calculates the total
 
 ### level_to_power
 
-Converts logarithmic sound pressure level (dB) values to metric power (W/m²) values.
+Converts logarithmic sound pressure level (dB) values to metric power (W/sqm) values.
 
 ```python
 >>> audiocalc.level_to_power(100)
 0.01
 ```
+
+## Development
+
+Execute the unit tests using
+
+    python -m audiocalc.test
+
+A performance test script for the `distant_total_damped_rated_level` function (which makes use of other functions as well) can be executed like this:
+
+    python -m audiocalc.benchmark_damping
+
+In order to activate profiling of the benchmark, add the `-p` parameter.
+
+    python -m audiocalc.benchmark_damping -p
+
 
 ## Credits
 
