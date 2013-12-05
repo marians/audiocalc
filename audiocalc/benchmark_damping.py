@@ -21,4 +21,3 @@ if __name__ == '__main__':
         cProfile.run('audiocalc.benchmark_damping()')
     else:
         audiocalc.benchmark_damping()
-
