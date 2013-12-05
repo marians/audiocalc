@@ -18,22 +18,23 @@ class TestSequenceFunctions(unittest.TestCase):
             'f8000': 32}
 
     def test_damping_01(self):
-        self.assertAlmostEqual(audiocalc.damping(20, 80, 8000), 0.06945538)
+        damp = audiocalc.damping(20, 80, 8000)
+        self.assertEqual("%.4f" % damp, "0.0695")
 
     def test_total_level_01(self):
         level = audiocalc.total_level(self.octave_frequencies)
-        self.assertAlmostEqual(level, 73.91092307)
+        self.assertEqual("%.4f" % level, "73.9109")
 
     def test_total_rated_level_01(self):
         level = audiocalc.total_rated_level(self.octave_frequencies)
-        self.assertAlmostEqual(level, 60.505465969)
+        self.assertEqual("%.4f" % level, "60.5055")
 
     def test_distant_level_01(self):
         l = audiocalc.distant_level(
                 reference_level=100,
                 distance=100,
                 reference_distance=1)
-        self.assertAlmostEqual(l, 59.99999980)
+        self.assertEqual("%.4f" % l, "60.0000")
 
     def test_distant_total_level_damped_rated_01(self):
         level = audiocalc.distant_total_damped_rated_level(
@@ -42,7 +43,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=5000,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 30.06003133)
+        self.assertEqual("%.4f" % level, "30.0600")
 
     def test_distant_total_level_damped_rated_02(self):
         """distance < reference distance"""
@@ -52,7 +53,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=200,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 64.3337803)
+        self.assertEqual("%.4f" % level, "64.3338")
 
     def test_level_to_power_01(self):
         p = audiocalc.level_to_power(100)
