@@ -11,8 +11,6 @@ import audiocalc
 
 if __name__ == '__main__':
     import argparse
-    import time
-    start = time.clock()
     info = "Run benchmark"
     parser = argparse.ArgumentParser(description=info)
     parser.add_argument('-p', '--profile', dest="profile",
@@ -23,4 +21,4 @@ if __name__ == '__main__':
         cProfile.run('audiocalc.benchmark_damping()')
     else:
         audiocalc.benchmark_damping()
-    print "Duration: %.3f sec" % (time.clock() - start)
+

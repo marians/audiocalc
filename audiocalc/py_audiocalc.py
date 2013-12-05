@@ -159,6 +159,9 @@ def benchmark_damping():
     # the above values have been measure in this distance:
     reference_distance = 300
 
+    import time
+    start = time.clock()
+
     for temp in xrange(-20, 35):
         for hum in xrange(30, 98):
             for distance in xrange(500, 10000, 500):
@@ -168,3 +171,4 @@ def benchmark_damping():
                     distance=distance,
                     temp=temp,
                     relhum=hum)
+    print("Duration: %.3f sec" % (time.clock() - start))
