@@ -22,18 +22,18 @@ class TestSequenceFunctions(unittest.TestCase):
 
     def test_total_level_01(self):
         level = audiocalc.total_level(self.octave_frequencies)
-        self.assertAlmostEqual(level, 73.91092323)
+        self.assertAlmostEqual(level, 73.91092307)
 
     def test_total_rated_level_01(self):
         level = audiocalc.total_rated_level(self.octave_frequencies)
-        self.assertAlmostEqual(level, 60.5054659)
+        self.assertAlmostEqual(level, 60.505465969)
 
     def test_distant_level_01(self):
         l = audiocalc.distant_level(
                 reference_level=100,
                 distance=100,
                 reference_distance=1)
-        self.assertAlmostEqual(l, 60)
+        self.assertAlmostEqual(l, 59.99999980)
 
     def test_distant_total_level_damped_rated_01(self):
         level = audiocalc.distant_total_damped_rated_level(
@@ -42,7 +42,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=5000,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 30.06003008)
+        self.assertAlmostEqual(level, 30.06003133)
 
     def test_distant_total_level_damped_rated_02(self):
         """distance < reference distance"""
@@ -52,7 +52,7 @@ class TestSequenceFunctions(unittest.TestCase):
             distance=200,
             temp=20,
             relhum=80)
-        self.assertAlmostEqual(level, 64.33378053)
+        self.assertAlmostEqual(level, 64.3337803)
 
     def test_level_to_power_01(self):
         p = audiocalc.level_to_power(100)

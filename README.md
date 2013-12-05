@@ -124,7 +124,8 @@ In order to activate profiling of the benchmark, add the `-p` parameter.
 
 ## Credits
 
-Some basic calculations have been adapted from http://www.sengpielaudio.com/
+* Christopher Arndt has helped with tremendous speedup through the use of Cython
+* Some basic calculations have been adapted from http://www.sengpielaudio.com/
 
 ## Like audiocalc?
 
