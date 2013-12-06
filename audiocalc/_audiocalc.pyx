@@ -17,7 +17,7 @@ OCTAVE_BANDS = {
 }
 
 
-cdef mydouble damping(mydouble temp, int relhum, mydouble freq, mydouble pres=101325.0):
+cpdef mydouble damping(mydouble temp, int relhum, mydouble freq, mydouble pres=101325.0):
     """
     Calculates the damping factor for sound in dB/m
     depending on temperature, humidity and sound frequency.
@@ -82,7 +82,7 @@ def total_rated_level(octave_frequencies):
     return level
 
 
-cdef mydouble distant_level(mydouble reference_level, mydouble distance, mydouble reference_distance=1.0):
+cpdef mydouble distant_level(mydouble reference_level, mydouble distance, mydouble reference_distance=1.0):
     """
     Calculates the sound pressure level
     in dependence of a distance
@@ -98,7 +98,7 @@ cdef mydouble distant_level(mydouble reference_level, mydouble distance, mydoubl
     return reference_level + 20.0 * (log(rel_dist) / log(10))
 
 
-cdef mydouble distant_total_damped_rated_level(
+cpdef mydouble distant_total_damped_rated_level(
             octave_frequencies,
             int distance,
             mydouble temp,
