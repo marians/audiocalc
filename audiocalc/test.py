@@ -22,8 +22,9 @@ class TestSequenceFunctions(unittest.TestCase):
         self.assertEqual("%.4f" % damp, "0.0695")
 
     def test_total_level_01(self):
-        level = audiocalc.total_level(self.octave_frequencies)
-        self.assertEqual("%.4f" % level, "73.9109")
+        levels = [71.5, 68.5, 64, 58, 53, 47, 40, 32]
+        level = audiocalc.total_level(levels)
+        self.assertAlmostEqual(level, 73.9109, places=4)
 
     def test_total_rated_level_01(self):
         level = audiocalc.total_rated_level(self.octave_frequencies)
@@ -58,6 +59,11 @@ class TestSequenceFunctions(unittest.TestCase):
     def test_level_to_power_01(self):
         p = audiocalc.level_to_power(100)
         self.assertEqual(p, 0.01)
+
+    def test_leq3_01(self):
+        levels = [30, 30, 30]
+        leq3 = audiocalc.leq3(levels)
+        self.assertAlmostEqual(leq3, 30, places=4)
 
 if __name__ == '__main__':
     unittest.main()

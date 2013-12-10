@@ -51,18 +51,17 @@ def damping(temp, relhum, freq, pres=101325):
     return damp
 
 
-def total_level(octave_frequencies):
+def total_level(source_levels):
     """
-    Calculates the total sound pressure level based on octave band frequencies
+    Calculates the total sound pressure level based on multiple source levels
     """
-    #print args
     sums = 0.0
-    for band in OCTAVE_BANDS.keys():
-        if band not in octave_frequencies:
+    for l in source_levels:
+        if l is None:
             continue
-        if octave_frequencies[band] is None:
+        if l == 0:
             continue
-        sums += pow(10.0, (float(octave_frequencies[band]) / 10.0))
+        sums += pow(10.0, float(l) / 10.0)
     level = 10.0 * math.log(sums, 10.0)
     return level
 
@@ -78,9 +77,27 @@ def total_rated_level(octave_frequencies):
             continue
         if octave_frequencies[band] is None:
             continue
+        if octave_frequencies[band] == 0:
+            continue
         sums += pow(10.0, ((float(octave_frequencies[band]) + OCTAVE_BANDS[band][1]) / 10.0))
     level = 10.0 * math.log(sums, 10.0)
     return level
+
+
+def leq3(levels):
+    """
+    Calculates the energy-equivalent (Leq3) value
+    given a regular measurement interval.
+    """
+    q = 10.0 * math.log(2.0, 10.0)  # pretty much 3
+    n = float(len(levels))
+    sums = 0.0
+    for l in levels:
+        if l == 0:
+            continue
+        sums += pow(10.0, float(l) / 10.0)
+    leq3 = (q / math.log(2.0, 10.0)) * math.log((1.0 / n) * sums, 10.0)
+    return leq3
 
 
 def distant_level(reference_level, distance, reference_distance=1.0):

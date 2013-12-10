@@ -45,19 +45,19 @@ cpdef mydouble damping(mydouble temp, int relhum, mydouble freq, mydouble pres=1
 
 
 
-def total_level(octave_frequencies):
+def total_level(source_levels):
     """
     Calculates the total sound pressure level based on octave band frequencies
     """
     cdef mydouble level
     cdef mydouble sums = 0.0
 
-    for band in OCTAVE_BANDS:
-        if octave_frequencies.get(band) is None:
+    for l in source_levels:
+        if l is None:
             continue
-
-        sums += pow(10.0, (<mydouble>octave_frequencies[band] / 10.0))
-
+        if l == 0:
+            continue
+        sums += pow(10.0, (<mydouble>l / 10.0))
     level = 10.0 * log10(sums)
     return level
 
@@ -80,6 +80,24 @@ def total_rated_level(octave_frequencies):
 
     level = 10.0 * log10(sums)
     return level
+
+
+cpdef mydouble leq3(levels):
+    """
+    Calculates the energy-equivalent (Leq3) value
+    given a regular measurement interval.
+    """
+    cdef mydouble q
+    cdef mydouble n
+    cdef mydouble sums = 0.0
+    q = 10.0 * log10(2.0)  # pretty much 3
+    n = <mydouble>len(levels)
+    for l in levels:
+        if l == 0:
+            continue
+        sums += pow(10.0, <mydouble>l / 10.0)
+    leq3 = (q / log10(2.0)) * log10((1.0 / n) * sums)
+    return leq3
 
 
 cpdef mydouble distant_level(mydouble reference_level, mydouble distance, mydouble reference_distance=1.0):
