@@ -99,6 +99,7 @@ cpdef mydouble leq3(levels):
             continue
         sums += pow(10.0, <mydouble>l / 10.0)
     leq3 = (q / log10(2.0)) * log10((1.0 / n) * sums)
+    leq3 = max(0.0, leq3)
     return leq3
 
 

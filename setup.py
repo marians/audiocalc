@@ -28,7 +28,7 @@ extensions = [
 ]
 
 setup(name='audiocalc',
-    version='0.0.8',
+    version='0.0.9',
     description='A few audio/sound calculation utilities',
     long_description=description,
     author='Marian Steinbach',

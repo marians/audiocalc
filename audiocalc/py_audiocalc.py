@@ -99,6 +99,7 @@ def leq3(levels):
             continue
         sums += pow(10.0, float(l) / 10.0)
     leq3 = (q / math.log(2.0, 10.0)) * math.log((1.0 / n) * sums, 10.0)
+    leq3 = max(0.0, leq3)
     return leq3
 
 
