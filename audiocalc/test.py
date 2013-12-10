@@ -65,5 +65,10 @@ class TestSequenceFunctions(unittest.TestCase):
         leq3 = audiocalc.leq3(levels)
         self.assertAlmostEqual(leq3, 30, places=4)
 
+    def test_leq3_02(self):
+        levels = [0, 0, 0]
+        leq3 = audiocalc.leq3(levels)
+        self.assertEqual(leq3, 0.0)
+
 if __name__ == '__main__':
     unittest.main()

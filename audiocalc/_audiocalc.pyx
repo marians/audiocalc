@@ -92,6 +92,8 @@ cpdef mydouble leq3(levels):
     cdef mydouble sums = 0.0
     q = 10.0 * log10(2.0)  # pretty much 3
     n = <mydouble>len(levels)
+    if sum(levels) == 0.0:
+        return 0.0
     for l in levels:
         if l == 0:
             continue

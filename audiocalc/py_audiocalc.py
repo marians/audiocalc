@@ -92,6 +92,8 @@ def leq3(levels):
     q = 10.0 * math.log(2.0, 10.0)  # pretty much 3
     n = float(len(levels))
     sums = 0.0
+    if sum(levels) == 0.0:
+        return 0.0
     for l in levels:
         if l == 0:
             continue
