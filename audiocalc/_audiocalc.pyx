@@ -87,10 +87,8 @@ cpdef mydouble leq3(levels):
     Calculates the energy-equivalent (Leq3) value
     given a regular measurement interval.
     """
-    cdef mydouble q
     cdef mydouble n
     cdef mydouble sums = 0.0
-    q = 10.0 * log10(2.0)  # pretty much 3
     n = <mydouble>len(levels)
     if sum(levels) == 0.0:
         return 0.0
@@ -98,7 +96,7 @@ cpdef mydouble leq3(levels):
         if l == 0:
             continue
         sums += pow(10.0, <mydouble>l / 10.0)
-    leq3 = (q / log10(2.0)) * log10((1.0 / n) * sums)
+    leq3 = 10.0 * log10((1.0 / n) * sums)
     leq3 = max(0.0, leq3)
     return leq3
 
