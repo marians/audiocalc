@@ -89,7 +89,6 @@ def leq3(levels):
     Calculates the energy-equivalent (Leq3) value
     given a regular measurement interval.
     """
-    q = 10.0 * math.log(2.0, 10.0)  # pretty much 3
     n = float(len(levels))
     sums = 0.0
     if sum(levels) == 0.0:
@@ -98,7 +97,7 @@ def leq3(levels):
         if l == 0:
             continue
         sums += pow(10.0, float(l) / 10.0)
-    leq3 = (q / math.log(2.0, 10.0)) * math.log((1.0 / n) * sums, 10.0)
+    leq3 = 10.0 * math.log((1.0 / n) * sums, 10.0)
     leq3 = max(0.0, leq3)
     return leq3
 
