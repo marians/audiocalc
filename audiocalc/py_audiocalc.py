@@ -62,7 +62,7 @@ def total_level(source_levels):
         if l == 0:
             continue
         sums += pow(10.0, float(l) / 10.0)
-    level = 10.0 * math.log(sums, 10.0)
+    level = 10.0 * math.log10(sums)
     return level
 
 
@@ -80,7 +80,7 @@ def total_rated_level(octave_frequencies):
         if octave_frequencies[band] == 0:
             continue
         sums += pow(10.0, ((float(octave_frequencies[band]) + OCTAVE_BANDS[band][1]) / 10.0))
-    level = 10.0 * math.log(sums, 10.0)
+    level = 10.0 * math.log10(sums)
     return level
 
 
@@ -97,7 +97,7 @@ def leq3(levels):
         if l == 0:
             continue
         sums += pow(10.0, float(l) / 10.0)
-    leq3 = 10.0 * math.log((1.0 / n) * sums, 10.0)
+    leq3 = 10.0 * math.log10((1.0 / n) * sums)
     leq3 = max(0.0, leq3)
     return leq3
 
@@ -150,7 +150,7 @@ def distant_total_damped_rated_level(
         # applyng A-rating
         distant_val += OCTAVE_BANDS[band][1]
         sums += pow(10.0, (distant_val / 10.0))
-    level = 10.0 * math.log(sums, 10.0)
+    level = 10.0 * math.log10(sums)
     return level
 
 
